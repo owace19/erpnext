@@ -706,7 +706,7 @@ def get_item_price(args, item_code, ignore_party=False):
 
 	matches_uom = filter(lambda d: cstr(d[2]) == cstr(args.get('uom')), out)
 	if matches_uom:
-		return matches_uom
+		return list(matches_uom)
 
 	has_uom = filter(lambda d: d[2], out)
 	if has_uom:
@@ -719,11 +719,11 @@ def get_item_price(args, item_code, ignore_party=False):
 		if convertible_prices:
 			has_uom_other_than_stock_uom = filter(lambda d: cstr(d[2]) != cstr(item.stock_uom), convertible_prices)
 			if has_uom_other_than_stock_uom:
-				return has_uom_other_than_stock_uom
+				return list(has_uom_other_than_stock_uom)
 
-		return convertible_prices
+		return list(convertible_prices)
 
-	return out
+	return list(out)
 
 def get_price_list_rate_for(args, item_code):
 	"""

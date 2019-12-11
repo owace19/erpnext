@@ -251,6 +251,7 @@ def get_price_lists(filters):
 		price_lists += frappe.db.sql_list("select name from `tabPrice List` where {0}"
 				.format(conditions))
 
+	price_lists = [d for d in price_lists if d]
 	return price_lists, filters.selected_price_list
 
 
