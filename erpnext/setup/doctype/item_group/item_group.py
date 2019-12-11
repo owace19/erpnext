@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 import frappe
 import copy
-from frappe.utils import nowdate, cint, cstr
+from frappe.utils import nowdate, cint, cstr, get_timestamp
 from frappe.utils.nestedset import NestedSet
 from frappe.website.website_generator import WebsiteGenerator
 from frappe.website.render import clear_cache
@@ -78,6 +78,25 @@ class ItemGroup(NestedSet, WebsiteGenerator):
 			context.update(get_slideshow(self))
 
 		return context
+
+
+def get_timeline_data(doctype, name):
+	'''returns timeline data based on stock ledger entry'''
+	out = {}
+	items = dict(frappe.db.sql('''
+		select sle.posting_date, count(*)
+		from `tabStock Ledger Entry` sle
+		inner join `tabItem` i on i.name = sle.item_code
+		where i.item_group=%s  and sle.posting_date > date_sub(curdate(), interval 1 year)
+		group by sle.posting_date
+	''', name))
+
+	for date, count in iteritems(items):
+		timestamp = get_timestamp(date)
+		out.update({timestamp: count})
+
+	return out
+
 
 @frappe.whitelist(allow_guest=True)
 def get_product_list_for_group(product_group=None, start=0, limit=10, search=None):

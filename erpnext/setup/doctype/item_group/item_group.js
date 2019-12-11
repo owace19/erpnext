@@ -61,6 +61,7 @@ frappe.ui.form.on("Item Group", {
 				frappe.set_route("List", "Item", {"item_group": frm.doc.name});
 			});
 		}
+		frm.events.make_dashboard(frm);
 
 		erpnext.utils.set_item_naming_series_options(frm);
 	},
@@ -72,6 +73,22 @@ frappe.ui.form.on("Item Group", {
 			frm.set_read_only();
 			frm.set_intro(__("This is a root item group and cannot be edited."), true);
 		}
+	},
+
+	make_dashboard: function(frm) {
+		if(frm.doc.__islocal)
+			return;
+
+		// Show Stock Levels only if is_stock_item
+        frappe.require('assets/js/item-dashboard.min.js', function() {
+            var section = frm.dashboard.add_section('<h5 style="margin-top: 0px;">\
+                <a href="#stock-balance">' + __("Stock Levels") + '</a></h5>');
+            frm.events.item_group_dashboard = new erpnext.stock.ItemDashboard({
+                parent: section,
+                item_group: frm.doc.name
+            })
+            frm.events.item_group_dashboard.refresh();
+        });
 	},
 
 	page_name: frappe.utils.warn_page_name_change
