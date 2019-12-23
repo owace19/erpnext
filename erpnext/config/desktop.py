@@ -16,87 +16,28 @@ def get_data():
 	}
 
 	return [
-		{"module_name": "Item", "_doctype": "Item", "type": "list",
-			"color": colors["Stock"], "icon": "octicon octicon-package"},
-		{"module_name": "Item Price", "_doctype": "Item Price", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-usd"},
-		{"module_name": "Pricing Rule", "_doctype": "Pricing Rule", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-usd"},
 
-		{"module_name": "Customer", "_doctype": "Customer", "type": "list",
-			"color": colors["Selling"], "icon": "octicon octicon-tag"},
-		{"module_name": "Supplier", "_doctype": "Supplier", "type": "list",
-			"color": colors["Buying"], "icon": "octicon octicon-briefcase"},
-		{"module_name": "Letter of Credit", "_doctype": "Letter of Credit", "type": "list",
-			"color": colors["Buying"], "icon": "fa fa-university"},
-		{"module_name": "Account", "_doctype": "Account", "type": "link", "link": "Tree/Account", "label": _("Chart of Accounts"),
-			"color": colors["Accounts"], "icon": "fa fa-sitemap"},
 
-		{"module_name": "Project", "_doctype": "Project", "type": "list",
-			"color": colors["Projects"], "icon": "octicon octicon-rocket"},
-		{"module_name": "Task", "_doctype": "Task", "type": "list",
-			"color": colors["Projects"], "icon": "octicon octicon-rocket"},
+		{"module_name": "Gray Fabric", "type": "link",
+		 "link": "Form/Item Group/Gray Fabric", "force_show": 1,
+		 "color": "gray", "icon": "octicon octicon-git-commit"},
 
-		{"module_name": "Sales Order", "_doctype": "Sales Order", "type": "list",
-			"color": colors["Selling"], "icon": "fa fa-file-text"},
-		{"module_name": "Purchase Order", "_doctype": "Purchase Order", "type": "list",
-			"color": colors["Buying"], "icon": "fa fa-file-text"},
-		{"module_name": "Delivery Note", "_doctype": "Delivery Note", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-truck"},
-		{"module_name": "Purchase Receipt", "_doctype": "Purchase Receipt", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-truck"},
-		{"module_name": "Sales Invoice", "_doctype": "Sales Invoice", "type": "list",
-			"color": colors["Accounts"], "icon": "fa fa-file-text"},
-		{"module_name": "Purchase Invoice", "_doctype": "Purchase Invoice", "type": "list",
-			"color": colors["Accounts"], "icon": "fa fa-file-text"},
+		{"module_name": "Cutpiece", "type": "link",
+		 "link": "Form/Item Group/Cutpiece", "force_show": 1,
+		 "color": "blue", "icon": "fa fa-scissors"},
 
-		{"module_name": "Stock Entry", "_doctype": "Stock Entry", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-truck"},
-		{"module_name": "Stock Reconciliation", "_doctype": "Stock Reconciliation", "type": "list",
-			"color": colors["Stock"], "icon": "fa fa-files-o"},
+		{"module_name": "Stock Transfer", "type": "link",
+		 "link": "Form/Stock Entry/New Stock Entry", "force_show": 1,
+		 "color": "yellow", "icon": "octicon octicon-git-branch", "reverse": 1,},
 
-		{"module_name": "Journal Entry", "_doctype": "Journal Entry", "type": "list",
-			"color": colors["Accounts"], "icon": "fa fa-book"},
-		{"module_name": "Payment Entry", "_doctype": "Payment Entry", "type": "list",
-			"color": colors["Accounts"], "icon": "fa fa-money"},
-		{"module_name": "Payment Reconciliation", "_doctype": "Payment Reconciliation", "type": "list",
-			"color": colors["Accounts"], "icon": "fa fa-files-o"},
+		{"module_name": "Embroidery", "type": "link",
+		 "link": "Form/Item Group/Embroidery", "force_show": 1,
+		 "color": "Red", "icon": "octicon octicon-git-compare"},
 
-		{"module_name": "Leaderboard", "type": "page", "link": "leaderboard", "label": _("Leaderboard"),
-			"color": "#589494", "icon": "octicon octicon-graph"},
+		{"module_name": "Finished Goods", "type": "link",
+		 "link": "Form/Item Group/Finished Goods", "force_show": 1,
+		 "color": "Green", "icon": "octicon octicon-package"},
 
-		{"module_name": "General Ledger", "_report": "General Ledger", "type": "query-report", "link": "query-report/General Ledger",
-			"color": colors["Accounts"], "icon": "fa fa-book"},
-		{"module_name": "Accounts Receivable", "_report": "Accounts Receivable", "type": "query-report", "link": "query-report/Accounts Receivable",
-			"color": colors["Selling"], "icon": "fa fa-tasks"},
-		{"module_name": "Accounts Payable", "_report": "Accounts Payable", "type": "query-report", "link": "query-report/Accounts Payable",
-			"color": colors["Buying"], "icon": "fa fa-tasks"},
-		{"module_name": "Customer Ledger Summary", "_report": "Customer Ledger Summary", "type": "query-report", "link": "query-report/Customer Ledger Summary",
-			"color": colors["Selling"], "icon": "fa fa-book"},
-		{"module_name": "Supplier Ledger Summary", "_report": "Supplier Ledger Summary", "type": "query-report", "link": "query-report/Supplier Ledger Summary",
-			"color": colors["Buying"], "icon": "fa fa-book"},
-		{"module_name": "Customer Credit Balance", "_report": "Customer Credit Balance", "type": "query-report", "link": "query-report/Customer Credit Balance",
-			"color": colors["Selling"], "icon": "fa fa-credit-card"},
-
-		{"module_name": "Stock Ledger", "_report": "Stock Ledger", "type": "query-report", "link": "query-report/Stock Ledger",
-			"color": colors["Stock"], "icon": "fa fa-exchange"},
-		{"module_name": "Stock Balance", "_report": "Stock Balance", "type": "query-report", "link": "query-report/Stock Balance",
-			"color": colors["Stock"], "icon": "octicon octicon-package"},
-
-		{"module_name": "Sales Analytics", "_report": "Sales Analytics", "type": "query-report", "link": "query-report/Sales Analytics",
-			"color": colors["Selling"], "icon": "fa fa-line-chart"},
-		{"module_name": "Sales Details", "_report": "Sales Details", "type": "query-report", "link": "query-report/Sales Details",
-			"color": colors["Selling"], "icon": "fa fa-list"},
-
-		{"module_name": "Purchase Analytics", "_report": "Purchase Analytics", "type": "query-report", "link": "query-report/Purchase Analytics",
-			"color": colors["Buying"], "icon": "fa fa-line-chart"},
-		{"module_name": "Purchase Details", "_report": "Purchase Details", "type": "query-report", "link": "query-report/Purchase Details",
-			"color": colors["Buying"], "icon": "fa fa-list"},
-
-		{"module_name": "Trial Balance", "_report": "Trial Balance", "type": "query-report", "link": "query-report/Trial Balance",
-			"color": colors["Accounts"], "icon": "fa fa-balance-scale"},
-		{"module_name": "Trial Balance for Party", "_report": "Trial Balance for Party", "type": "query-report", "link": "query-report/Trial Balance for Party",
-			"color": colors["Accounts"], "icon": "fa fa-balance-scale"},
 
 		# old
 		{
@@ -138,8 +79,7 @@ def get_data():
 			"module_name": "HR",
 			"color": "#2ecc71",
 			"icon": "octicon octicon-organization",
-			"label": _("Human Resources"),
-			"type": "module",
+			"label": _("Human Resources"), "type": "module",
 			"hidden": 1
 		},
 		{
@@ -239,3 +179,95 @@ def get_data():
 			"hidden": 1
 		}
 	]
+
+
+
+
+
+
+
+
+
+'''
+		{"module_name": "Item", "_doctype": "Item", "type": "list",
+			"color": colors["Stock"], "icon": "octicon octicon-package"},
+		{"module_name": "Item Price", "_doctype": "Item Price", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-usd"},
+		{"module_name": "Pricing Rule", "_doctype": "Pricing Rule", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-usd"},
+
+		{"module_name": "Customer", "_doctype": "Customer", "type": "list",
+			"color": colors["Selling"], "icon": "octicon octicon-tag"},
+		{"module_name": "Supplier", "_doctype": "Supplier", "type": "list",
+			"color": colors["Buying"], "icon": "octicon octicon-briefcase"},
+		{"module_name": "Letter of Credit", "_doctype": "Letter of Credit", "type": "list",
+			"color": colors["Buying"], "icon": "fa fa-university"},
+		{"module_name": "Account", "_doctype": "Account", "type": "link", "link": "Tree/Account", "label": _("Chart of Accounts"),
+			"color": colors["Accounts"], "icon": "fa fa-sitemap"},
+
+		{"module_name": "Project", "_doctype": "Project", "type": "list",
+			"color": colors["Projects"], "icon": "octicon octicon-rocket"},
+		{"module_name": "Task", "_doctype": "Task", "type": "list",
+			"color": colors["Projects"], "icon": "octicon octicon-rocket"},
+
+		{"module_name": "Sales Order", "_doctype": "Sales Order", "type": "list",
+			"color": colors["Selling"], "icon": "fa fa-file-text"},
+		{"module_name": "Purchase Order", "_doctype": "Purchase Order", "type": "list",
+			"color": colors["Buying"], "icon": "fa fa-file-text"},
+		{"module_name": "Delivery Note", "_doctype": "Delivery Note", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-truck"},
+		{"module_name": "Purchase Receipt", "_doctype": "Purchase Receipt", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-truck"},
+		{"module_name": "Sales Invoice", "_doctype": "Sales Invoice", "type": "list",
+			"color": colors["Accounts"], "icon": "fa fa-file-text"},
+		{"module_name": "Purchase Invoice", "_doctype": "Purchase Invoice", "type": "list",
+			"color": colors["Accounts"], "icon": "fa fa-file-text"},
+
+		{"module_name": "Stock Entry", "_doctype": "Stock Entry", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-truck"},
+		{"module_name": "Stock Reconciliation", "_doctype": "Stock Reconciliation", "type": "list",
+			"color": colors["Stock"], "icon": "fa fa-files-o"},
+
+		{"module_name": "Journal Entry", "_doctype": "Journal Entry", "type": "list",
+			"color": colors["Accounts"], "icon": "fa fa-book"},
+		{"module_name": "Payment Entry", "_doctype": "Payment Entry", "type": "list",
+			"color": colors["Accounts"], "icon": "fa fa-money"},
+		{"module_name": "Payment Reconciliation", "_doctype": "Payment Reconciliation", "type": "list",
+			"color": colors["Accounts"], "icon": "fa fa-files-o"},
+
+		{"module_name": "Leaderboard", "type": "page", "link": "leaderboard", "label": _("Leaderboard"),
+			"color": "#589494", "icon": "octicon octicon-graph"},
+
+		{"module_name": "General Ledger", "_report": "General Ledger", "type": "query-report", "link": "query-report/General Ledger",
+			"color": colors["Accounts"], "icon": "fa fa-book"},
+		{"module_name": "Accounts Receivable", "_report": "Accounts Receivable", "type": "query-report", "link": "query-report/Accounts Receivable",
+			"color": colors["Selling"], "icon": "fa fa-tasks"},
+		{"module_name": "Accounts Payable", "_report": "Accounts Payable", "type": "query-report", "link": "query-report/Accounts Payable",
+			"color": colors["Buying"], "icon": "fa fa-tasks"},
+		{"module_name": "Customer Ledger Summary", "_report": "Customer Ledger Summary", "type": "query-report", "link": "query-report/Customer Ledger Summary",
+			"color": colors["Selling"], "icon": "fa fa-book"},
+		{"module_name": "Supplier Ledger Summary", "_report": "Supplier Ledger Summary", "type": "query-report", "link": "query-report/Supplier Ledger Summary",
+			"color": colors["Buying"], "icon": "fa fa-book"},
+		{"module_name": "Customer Credit Balance", "_report": "Customer Credit Balance", "type": "query-report", "link": "query-report/Customer Credit Balance",
+			"color": colors["Selling"], "icon": "fa fa-credit-card"},
+
+		{"module_name": "Stock Ledger", "_report": "Stock Ledger", "type": "query-report", "link": "query-report/Stock Ledger",
+			"color": colors["Stock"], "icon": "fa fa-exchange"},
+		{"module_name": "Stock Balance", "_report": "Stock Balance", "type": "query-report", "link": "query-report/Stock Balance",
+			"color": colors["Stock"], "icon": "octicon octicon-package"},
+
+		{"module_name": "Sales Analytics", "_report": "Sales Analytics", "type": "query-report", "link": "query-report/Sales Analytics",
+			"color": colors["Selling"], "icon": "fa fa-line-chart"},
+		{"module_name": "Sales Details", "_report": "Sales Details", "type": "query-report", "link": "query-report/Sales Details",
+			"color": colors["Selling"], "icon": "fa fa-list"},
+
+		{"module_name": "Purchase Analytics", "_report": "Purchase Analytics", "type": "query-report", "link": "query-report/Purchase Analytics",
+			"color": colors["Buying"], "icon": "fa fa-line-chart"},
+		{"module_name": "Purchase Details", "_report": "Purchase Details", "type": "query-report", "link": "query-report/Purchase Details",
+			"color": colors["Buying"], "icon": "fa fa-list"},
+
+		{"module_name": "Trial Balance", "_report": "Trial Balance", "type": "query-report", "link": "query-report/Trial Balance",
+			"color": colors["Accounts"], "icon": "fa fa-balance-scale"},
+		{"module_name": "Trial Balance for Party", "_report": "Trial Balance for Party", "type": "query-report", "link": "query-report/Trial Balance for Party",
+			"color": colors["Accounts"], "icon": "fa fa-balance-scale"},
+'''

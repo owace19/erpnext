@@ -542,7 +542,7 @@ class Item(WebsiteGenerator):
 
 		# Only update conversion factors if something has changed
 		old_conv_factors = [{"uom": d.uom, "conversion_factor": d.conversion_factor} for d in self.uoms]
-		if cmp(conv_factors, old_conv_factors) != 0:
+		if conv_factors != old_conv_factors:
 			self.set("uoms", [])
 			for d in conv_factors:
 				self.append("uoms", d)
