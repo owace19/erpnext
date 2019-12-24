@@ -19,23 +19,23 @@ def get_data():
 
 
 		{"module_name": "Gray Fabric", "type": "link",
-		 "link": "Form/Item Group/Gray Fabric", "force_show": 1,
+		 "link": "Form/Item Group/Gray Fabric",
 		 "color": "gray", "icon": "octicon octicon-git-commit"},
 
 		{"module_name": "Cutpiece", "type": "link",
-		 "link": "Form/Item Group/Cutpiece", "force_show": 1,
+		 "link": "Form/Item Group/Cutpiece",
 		 "color": "blue", "icon": "fa fa-scissors"},
 
 		{"module_name": "Stock Transfer", "type": "link",
-		 "link": "Form/Stock Entry/New Stock Entry", "force_show": 1,
+		 "link": "Form/Stock Entry/New Stock Entry",
 		 "color": "yellow", "icon": "octicon octicon-git-branch", "reverse": 1,},
 
 		{"module_name": "Embroidery", "type": "link",
-		 "link": "Form/Item Group/Embroidery", "force_show": 1,
+		 "link": "Form/Item Group/Embroidery",
 		 "color": "Red", "icon": "octicon octicon-git-compare"},
 
 		{"module_name": "Finished Goods", "type": "link",
-		 "link": "Form/Item Group/Finished Goods", "force_show": 1,
+		 "link": "Form/Item Group/Finished Goods", 
 		 "color": "Green", "icon": "octicon octicon-package"},
 
 
