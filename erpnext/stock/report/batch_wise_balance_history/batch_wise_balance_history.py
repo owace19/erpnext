@@ -13,7 +13,7 @@ def execute(filters=None):
 
 	columns = get_columns(filters)
 	item_map = get_item_details(filters)
-	iwb_map = get_item_warehouse_batch_map(filters, float_precision)
+	iwb_map = get_item_warehouse_batch_map(filters)
 
 	data = []
 	for item in sorted(iwb_map):
@@ -46,22 +46,52 @@ def get_conditions(filters):
 		frappe.throw(_("'From Date' is required"))
 
 	if filters.get("to_date"):
-		conditions += " and posting_date <= '%s'" % filters["to_date"]
+		conditions += " and posting_date <= %(to_date)s"
 	else:
 		frappe.throw(_("'To Date' is required"))
 
+	if filters.get("batch_no"):
+		conditions += " and batch_no = %(batch_no)s"
+
+	if filters.get("warehouse"):
+		conditions += " and warehouse = %(warehouse)s"
+
 	return conditions
 
-#get all details
+def get_item_conditions(filters):
+	from erpnext.stock.report.stock_ledger.stock_ledger import get_item_group_condition
+	conditions = []
+	if filters.get("item_code"):
+		conditions.append("item.name=%(item_code)s")
+	else:
+		if filters.get("brand"):
+			conditions.append("item.brand=%(brand)s")
+		if filters.get("item_group"):
+			conditions.append(get_item_group_condition(filters.get("item_group")))
+
+	items = []
+	if conditions:
+		items = frappe.db.sql_list("""select name from `tabItem` item where {}"""
+			.format(" and ".join(conditions)), filters)
+	item_conditions_sql = ''
+	if items:
+		item_conditions_sql = ' and sle.item_code in ({})' \
+			.format(', '.join(['"' + frappe.db.escape(i, percent=False) + '"' for i in items]))
+
+	return item_conditions_sql
+
+# get all details
 def get_stock_ledger_entries(filters):
+	item_conditions = get_item_conditions(filters)
 	conditions = get_conditions(filters)
+
 	return frappe.db.sql("""select item_code, batch_no, warehouse,
 		posting_date, actual_qty
-		from `tabStock Ledger Entry`
-		where docstatus < 2 and ifnull(batch_no, '') != '' %s order by item_code, warehouse""" %
-		conditions, as_dict=1)
+		from `tabStock Ledger Entry` sle
+		where docstatus < 2 and ifnull(batch_no, '') != '' {0} {1} order by item_code, warehouse
+		""".format(conditions, item_conditions), filters, as_dict=1)
 
-def get_item_warehouse_batch_map(filters, float_precision):
+def get_item_warehouse_batch_map(filters):
 	sle = get_stock_ledger_entries(filters)
 	iwb_map = {}
 
@@ -75,16 +105,14 @@ def get_item_warehouse_batch_map(filters, float_precision):
 			}))
 		qty_dict = iwb_map[d.item_code][d.warehouse][d.batch_no]
 		if d.posting_date < from_date:
-			qty_dict.opening_qty = flt(qty_dict.opening_qty, float_precision) \
-				+ flt(d.actual_qty, float_precision)
+			qty_dict.opening_qty = qty_dict.opening_qty + d.actual_qty
 		elif d.posting_date >= from_date and d.posting_date <= to_date:
 			if flt(d.actual_qty) > 0:
-				qty_dict.in_qty = flt(qty_dict.in_qty, float_precision) + flt(d.actual_qty, float_precision)
+				qty_dict.in_qty = qty_dict.in_qty + d.actual_qty
 			else:
-				qty_dict.out_qty = flt(qty_dict.out_qty, float_precision) \
-					+ abs(flt(d.actual_qty, float_precision))
+				qty_dict.out_qty = qty_dict.out_qty + abs(d.actual_qty)
 
-		qty_dict.bal_qty = flt(qty_dict.bal_qty, float_precision) + flt(d.actual_qty, float_precision)
+		qty_dict.bal_qty = qty_dict.bal_qty + d.actual_qty
 
 	return iwb_map
 
