@@ -4,6 +4,7 @@
 {%- set prec_docs = doc.items|map(attribute='purchase_receipt')|unique|list if doc.doctype == "Purchase Invoice" else [] -%}
 
 {%- set show_amounts = doc.doctype not in ["Delivery Note", "Purchase Receipt", "Stock Entry"] -%}
+{%- set show_amounts = False -%}
 {%- set show_discount = doc.doctype not in ["Supplier Quotation", "Purchase Order", "Purchase Receipt", "Purchase Invoice"] -%}
 
 {%- set company = frappe.get_cached_doc("Company", doc.company) -%}
@@ -28,7 +29,14 @@
 				{% if not no_letterhead %}
 					<h1 class="company-name" style="margin:0;padding:3px;border-bottom:#000 1px solid;">{{ doc.company }}</h1>
 				{% endif %}
-				<h4 style="margin:0;padding:3px;">{{ doc.select_print_heading or doc.purpose or doc.doctype }}{% if doc.docstatus == 0 %} (Draft){% endif %} - {{ frappe.original_name(doc) }}</h4>
+				<h4 style="margin:0;padding:3px;">
+					{% if doc.doctype == "Purchase Order" %}
+						Issued For {% if doc.docstatus == 0 %} (Draft){% endif %} - {{ frappe.original_name(doc) }}
+
+					{% else %}
+						{{ doc.select_print_heading or doc.purpose or doc.doctype }}{% if doc.docstatus == 0 %} (Draft){% endif %} - {{ frappe.original_name(doc) }}
+					{% endif %}
+				</h4>
 			</div>
 
 			<p class="small text-center page-number visible-pdf">

@@ -63,6 +63,9 @@
 			{% endif %}
 			<th>{{ _("Taxable Amount") if show_discount else _("Amount") }}</th>
 		{% endif %}
+        <th>
+            Comments
+        </th>
 	</tr>
 </thead>
 
@@ -96,6 +99,9 @@
 			{% endif %}
 			<td class="text-right text-nowrap">{{ row.get_formatted("taxable_amount") }}</td>
 		{% endif %}
+        <td>
+            {{row.comment}}
+        </td>
 	</tr>
 {%- endfor -%}
 </tbody>
@@ -122,6 +128,7 @@
 			{% endif %}
 			<td class="text-right text-nowrap">{{ doc.get_formatted("taxable_total") }}</td>
 		{% endif %}
+		<td></td>
 	</tr>
 
 {% if force_show_amounts or show_amounts %}
